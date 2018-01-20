@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Todos from './components/todos';
+import Todos from './containers/todos';
 
 class App extends Component {
   render() {
