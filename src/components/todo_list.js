@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import TodoItem from '../containers/todo_item';
 
 const TodoList = function({todoList}) {
@@ -7,8 +8,9 @@ const TodoList = function({todoList}) {
     return <TodoItem todo={todo} key={index}></TodoItem>
   });
 
-  //TODO: Change this to propper syntax!
-  if(!todoList.length) return <h3>No todos yet</h3>;
+  if(!todoList.length) {
+    return <h3>No todos yet</h3>;
+  }
   return (
     <ul>
       {TodoItems}
@@ -17,4 +19,8 @@ const TodoList = function({todoList}) {
 
 }
 
-export default TodoList;
+const mapStateToProps = state => {
+  return {todoList: state.todos};
+}
+
+export default connect(mapStateToProps)(TodoList);

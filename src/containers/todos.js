@@ -36,7 +36,7 @@ class Todos extends Component {
           />
           <input type="submit" value="add"/>
         </form>
-        <TodoList todoList={this.props.todoList}></TodoList>
+        <TodoList></TodoList>
       </div>
     );
   }
