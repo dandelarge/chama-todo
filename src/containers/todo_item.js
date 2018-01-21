@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleTodo } from '../actions'
+import { toggleTodo, fetchTodos } from '../actions'
 
 class TodoItem extends Component {
   constructor(props) {
@@ -15,13 +15,12 @@ class TodoItem extends Component {
       <li>
         <input
           type="checkbox"
-          onClick={event => {
+          onChange={event => {
             this.props.toggleTodo(this.props.todo.id);
             this.setState({done: this.props.todo.done});
+            this.props.fetchTodos();
           }}
-          value={
-            this.state.done
-          }
+          checked={this.state.done}
         />
         <strong>{this.props.todo.text}</strong> {String(this.props.todo.done)}
       </li>
@@ -30,7 +29,7 @@ class TodoItem extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({toggleTodo: toggleTodo}, dispatch);
+  return bindActionCreators({ toggleTodo, fetchTodos }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(TodoItem);

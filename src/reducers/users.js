@@ -6,10 +6,11 @@ const user = (state = {}, action) => {
       state = action.payload;
       break;
     case LOGIN_SUCCESS:
-      console.log(action);
       state = action.payload;
+      state.loggedIn = true;
       break;
     case LOGOUT:
+      state = action.payload;
       state.loggedIn = false;
       break;
     case SIGNUP:

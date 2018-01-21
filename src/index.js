@@ -18,6 +18,8 @@ firebase.initializeApp(fbconfig);
 
 const createStoreWithMidleware = applyMiddleware(ReduxPromise)(createStore);
 
+firebase.auth().onAuthStateChanged(user => console.log(user));
+
 ReactDOM.render(
   <Provider store={
     createStoreWithMidleware(TodoApp,

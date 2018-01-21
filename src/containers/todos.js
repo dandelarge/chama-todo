@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TodoList from '../components/todo_list';
-import { addTodo } from '../actions/';
+import { addTodo, fetchTodos } from '../actions/';
 
 
 class Todos extends Component {
   constructor(props) {
     super(props);
-
+    this.props.fetchTodos();
+    console.log(this.props.todoList);
     this.state = {text: ''};
   }
 
@@ -25,6 +26,7 @@ class Todos extends Component {
           e.preventDefault();
           this.props.addTodo(e.target.newTodo.value, this.props.todoList.length);
           this.setState({text: ''});
+          this.props.fetchTodos();
         }}>
           <input
             type="text"
@@ -48,7 +50,7 @@ const mapStateToProps = state => {
 
 const mapsDispatchToProps = (dispatch) => {
     return bindActionCreators({
-      addTodo: addTodo,
+      addTodo, fetchTodos
     }, dispatch);
 };
 

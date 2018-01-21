@@ -2,11 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
+import firebase from 'firebase';
 
 import { login, loginSuccess, signup } from '../actions';
 
 const LoginForm =  withRouter(({ history, login, loginSuccess, signup, user }) => {
-    const doLogin = (e) => {
+
+  firebase.auth().onAuthStateChanged(usr => {
+    if(usr) {
+      loginSuccess(usr);
+      history.push('/app');
+    }
+  });
+
+    function doLogin(e) {
       e.preventDefault();
       const form = e.target;
       login(form.user.value, form.pass.value).then(action => {
@@ -15,7 +24,7 @@ const LoginForm =  withRouter(({ history, login, loginSuccess, signup, user }) =
         }
 
       });
-    };
+    }
 
     let userField, passField;
 
