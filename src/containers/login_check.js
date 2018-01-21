@@ -1,30 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {Redirect} from 'react-router-dom';
-import { login, logout } from '../actions'
+import { Redirect } from 'react-router-dom';
+import firebase from 'firebase';
 
-const LoginCheck = ({user}) => {
+import { loginSuccess } from '../actions';
 
-  console.log(user);
-
-  if(!user.loggedIn) {
+const LoginCheck = ({user, loginSuccess}) => {
+  if(!user.email) {
     return <Redirect to="/login"></Redirect>
+  } else {
+    return <Redirect to="/app"></Redirect>
   }
-
-  return <Redirect to="/app"></Redirect>
-
-
-  //   return (
-  //     <div>
-  //       <h2>{getLoginStatus(props.user)}</h2>
-  //       <button onClick={e => {
-  //         props.login('Daniel', '123');
-  //         console.log(props.user.loggedIn);
-  //       }}> Login!</button>
-  //       <button onClick={e => props.logout('Daniel')}> Logout :(</button>
-  //     </div>
-  //   );
 };
 
 const mapStateToProps = (state) => {
@@ -35,8 +22,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    login,
-    logout
+    loginSuccess
   }, dispatch);
 };
 

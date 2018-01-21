@@ -2,32 +2,52 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { login } from '../actions';
 
-  const LoginForm =  withRouter(({ history, login, user }) => {
+import { login, loginSuccess, signup } from '../actions';
 
-    const doLogin = (e, hostory) => {
+const LoginForm =  withRouter(({ history, login, loginSuccess, signup, user }) => {
+    const doLogin = (e) => {
       e.preventDefault();
       const form = e.target;
-      login(form.user.value, form.pass.value);
-      if(user.loggedIn) {
-        history.push('/app');
-      }
+      login(form.user.value, form.pass.value).then(action => {
+        if(action.payload.email) {
+          history.push('/app');
+        }
+
+      });
     };
 
-    return (
-      <div>
-        <form onSubmit={e => doLogin(e, history)}>
-          <input type="text" name="user" placeholder="user" />
-          <input type="password" name="pass" placeholder="password"/>
-          <button> Login!</button>
-        </form>
-      </div>
-  )});
+    let userField, passField;
+
+      return (
+        <div>
+          <form onSubmit={e => {
+            doLogin(e);
+          }}>
+            <input
+              type="text"
+              name="user"
+              placeholder="user"
+              ref={(input) => {userField = input}}
+            />
+            <input
+              type="password"
+              name="pass"
+              placeholder="password"
+              ref={(input) => { passField = input }}
+            />
+            <button>Login!</button>
+            <button onClick={e => {
+              signup(userField.value, passField.value);
+            }}>Signup</button>
+          </form>
+        </div>
+    );
+});
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({login}, dispatch);
+  return bindActionCreators({login, signup, loginSuccess}, dispatch);
 };
 
 const mapStateToProps = state => {
