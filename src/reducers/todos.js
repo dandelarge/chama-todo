@@ -1,10 +1,13 @@
-import { ADD_TODO, TOGGLE_TODO, FETCH_TODOS } from '../actions';
+import { ADD_TODO, TOGGLE_TODO, FETCH_TODOS , REMOVE_TODO} from '../actions';
 
 const todos = (state, action) => {
 
   state = state || [];
+  const index = state.findIndex(todo => todo.id === action.id);
 
   switch(action.type) {
+    case FETCH_TODOS:
+      return action.payload.val() || [];
     case ADD_TODO:
     console.log(action, state);
       return [
@@ -17,14 +20,13 @@ const todos = (state, action) => {
         }
       ];
     case TOGGLE_TODO:
-      console.log(action.id, state);
-      const index = state.findIndex(todo => todo.id === action.id);
       state[index].done = !state[index].done;
       action.payload.set(state[index].done);
       return state;
-
-    case FETCH_TODOS:
-      state = action.payload.val();
+    case REMOVE_TODO:
+      state.splice(index, 1);
+      action.payload.set(state);
+      return state;
     default:
       return state;
   }

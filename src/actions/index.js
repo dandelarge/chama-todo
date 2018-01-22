@@ -2,6 +2,7 @@ import firebase from 'firebase';
 
 export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
+export const REMOVE_TODO = 'REMOVE_TODO';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SIGNUP = 'SIGNUP';
@@ -40,6 +41,15 @@ export const toggleTodo = id => {
     id
   };
 };
+
+export const removeTodo = id => {
+  const database = firebase.database().ref('todos/');
+  return {
+    type: REMOVE_TODO,
+    payload: database,
+    id
+  };
+}
 
 export const login = (user, pass) => {
   return {

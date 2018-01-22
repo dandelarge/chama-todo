@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleTodo, fetchTodos } from '../actions'
+import { toggleTodo, fetchTodos, removeTodo } from '../actions'
 
 class TodoItem extends Component {
   constructor(props) {
@@ -31,6 +31,13 @@ class TodoItem extends Component {
           checked={this.state.done}
         />
         </label>
+        <button
+          onClick={e => {
+            this.props.removeTodo(this.props.todo.id);
+            this.props.fetchTodos();
+          }}
+          className="mdl-button"
+        >remove</button>
       </span>
       </li>
     );
@@ -38,7 +45,7 @@ class TodoItem extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ toggleTodo, fetchTodos }, dispatch);
+  return bindActionCreators({ toggleTodo, fetchTodos, removeTodo }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(TodoItem);
