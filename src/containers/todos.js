@@ -28,15 +28,23 @@ class Todos extends Component {
           this.setState({text: ''});
           this.props.fetchTodos();
         }}>
+          <div className="mdl-textfield mdl-js-textfield newTodo-textfield">
           <input
+            className="mdl-textfield__input "
+            placeholder=" What needs to be done?"
             type="text"
+            id="newTodo"
             name="newTodo"
             value={this.state.text}
             onChange={event =>
               this.setState({text:event.target.value})
             }
           />
-          <input type="submit" value="add"/>
+          </div>
+          <button type="submit"
+            className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+            <i className="material-icons">+</i>
+          </button>
         </form>
         <TodoList></TodoList>
       </div>

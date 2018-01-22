@@ -6,6 +6,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import firebase from 'firebase';
 import ReduxPromise from 'redux-promise'
 
+import './material.min.css';
+import './material.min';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';

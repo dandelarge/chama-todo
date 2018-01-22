@@ -12,7 +12,7 @@ const TodoList = function({todoList}) {
     return <h3>No todos yet</h3>;
   }
   return (
-    <ul>
+    <ul className="mdl-list">
       {TodoItems}
     </ul>
   );

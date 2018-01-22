@@ -12,8 +12,16 @@ class TodoItem extends Component {
 
   render(){
     return(
-      <li>
+      <li className="mdl-list__item">
+        <span className="mdl-list__item-primary-content">
+        <strong>{this.props.todo.text }</strong>
+        <span className="small-space"> {this.props.todo.done ? ' is Done!': ' Needs to be done'} </span>
+      </span>
+      <span className="mdl-list__item-secondary-action">
+        <label className="mdl-switch mdl-js-switch" htmlFor={this.props.todo.id}>
         <input
+          id={this.props.todo.id}
+          className="mdl-switch__input"
           type="checkbox"
           onChange={event => {
             this.props.toggleTodo(this.props.todo.id);
@@ -22,7 +30,8 @@ class TodoItem extends Component {
           }}
           checked={this.state.done}
         />
-        <strong>{this.props.todo.text}</strong> {String(this.props.todo.done)}
+        </label>
+      </span>
       </li>
     );
   }

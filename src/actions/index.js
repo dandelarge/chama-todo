@@ -7,8 +7,7 @@ export const LOGOUT = 'LOGOUT';
 export const SIGNUP = 'SIGNUP';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const FETCH_TODOS = 'FETCH_TODOS';
-
-
+export const GOOGLE_LOGIN = 'GOOGLE_LOGIN';
 
 export const fetchTodos = () => {
   const database = firebase.database().ref('todos/');
@@ -55,6 +54,14 @@ export const loginSuccess = user => {
     payload: user
   };
 };
+
+export const googleLogin = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  return {
+    type: GOOGLE_LOGIN,
+    payload: firebase.auth().signInWithPopup(provider)
+  }
+}
 
 export const logout = user => {
   firebase.auth().signOut()

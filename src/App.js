@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { logout } from './actions';
 import { bindActionCreators } from 'redux';
 
-import './App.css';
 import Todos from './containers/todos';
 
 const App = withRouter(({history, user, logout})=>{
